@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Immutable;
+using System.Linq;
+using Redux;
+using TodoRedux.Actions;
+using TodoRedux.States;
+
+namespace TodoRedux.Reducers
+{
+    public class TodoReducers
+    {
+		public static ImmutableArray<TodoItem> Reduce(ImmutableArray<TodoItem> previousState, IAction action)
+		{
+			if (action is AddTodoAction)
+			{
+				return AddTodoReducer(previousState, (AddTodoAction)action);
+			}
+			if (action is RemoveTodoAction)
+			{
+				return RemoveTodoReducer(previousState, (RemoveTodoAction)action);
+			}
+
+			return previousState;
+		}
+
+        private static ImmutableArray<TodoItem> RemoveTodoReducer(ImmutableArray<TodoItem> previousState, RemoveTodoAction action)
+        {
+            var todoToDelete = previousState.First(todo => todo.Id == action.Id);
+			return previousState.Remove(todoToDelete);
+        }
+
+        private static ImmutableArray<TodoItem> AddTodoReducer(ImmutableArray<TodoItem> previousState, AddTodoAction action)
+        {
+			return previousState
+				.Insert(0, new TodoItem
+				{
+					Id = action.Id,
+					Text = action.Text
+				});
+        }
+    }
+}
