@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using PropertyChanged;
+using TodoRedux.ActionCreators;
 using TodoRedux.Actions;
+using TodoRedux.States;
 using Xamarin.Forms;
 
 namespace TodoRedux.ViewModels
@@ -10,6 +12,7 @@ namespace TodoRedux.ViewModels
     public class TodoItemViewModel
     {
 		private readonly INavigation _navigation;
+        private readonly TodoItem _model;
 
 		public string Text { get; set; }
 
@@ -18,11 +21,33 @@ namespace TodoRedux.ViewModels
             get 
             {
                 return new Command(async () => {
-                    App.Store.Dispatch(new AddTodoAction { Id = Guid.NewGuid(), Text = Text });
+                    if (_model != null) 
+                    {
+                        App.Store.Dispatch(TodoActionCreators.UpdateTodo(_model.Id, Text));
+					}
+                    else 
+                    {
+                        App.Store.Dispatch(TodoActionCreators.AddTodo(Guid.NewGuid(), Text)); 
+                    }
                     await _navigation.PopAsync();
                 });
             }
         }
+
+		public Command Delete
+		{
+			get
+			{
+				return new Command(async () =>
+				{
+                    if (_model != null) 
+                    {
+                        App.Store.Dispatch(TodoActionCreators.RemoveTodo(_model.Id));
+                    }
+					await _navigation.PopAsync();
+				});
+			}
+		}
 
 		public Command Cancel
 		{
@@ -35,9 +60,18 @@ namespace TodoRedux.ViewModels
 			}
 		}
 
-        public TodoItemViewModel(INavigation navigation)
+        public TodoItemViewModel(INavigation navigation) : this(navigation, null)
         {
-            this._navigation = navigation;
         }
+
+		public TodoItemViewModel(INavigation navigation, TodoItem model)
+		{
+			_navigation = navigation;
+            _model = model;
+            if (model != null) 
+            {
+            	Text = model.Text;
+            }
+		}
     }
 }

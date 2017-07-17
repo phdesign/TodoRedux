@@ -15,12 +15,34 @@ namespace TodoRedux.Reducers
 			{
 				return AddTodoReducer(previousState, (AddTodoAction)action);
 			}
-			if (action is RemoveTodoAction)
+			if (action is UpdateTodoAction)
 			{
-				return RemoveTodoReducer(previousState, (RemoveTodoAction)action);
+				return UpdateTodoReducer(previousState, (UpdateTodoAction)action);
 			}
+            if (action is RemoveTodoAction)
+            {
+                return RemoveTodoReducer(previousState, (RemoveTodoAction)action);
+            }
 
 			return previousState;
+		}
+
+		private static ImmutableArray<TodoItem> UpdateTodoReducer(ImmutableArray<TodoItem> previousState, UpdateTodoAction action)
+		{
+			return previousState
+				.Select(x =>
+				{
+					if (x.Id == action.Id)
+					{
+						return new TodoItem()
+						{
+							Id = action.Id,
+							Text = action.Text
+						};
+					}
+					return x;
+				})
+				.ToImmutableArray();
 		}
 
         private static ImmutableArray<TodoItem> RemoveTodoReducer(ImmutableArray<TodoItem> previousState, RemoveTodoAction action)

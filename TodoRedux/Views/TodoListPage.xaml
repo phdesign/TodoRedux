@@ -5,7 +5,8 @@
 	</ContentPage.ToolbarItems>
 	<ListView x:Name="listView" 
         Margin="20" 
-        ItemsSource="{Binding Todos}">
+        ItemsSource="{Binding Todos}"
+        SelectedItem="{Binding SelectedItem}">
 		<ListView.ItemTemplate>
 			<DataTemplate>
                 <TextCell Text="{Binding Text}"/>

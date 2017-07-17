@@ -7,10 +7,14 @@ namespace TodoRedux.Views
 {
 	public partial class TodoItemPage : ContentPage
 	{
-		public TodoItemPage()
+		public TodoItemPage() : this(null)
+		{
+		}
+
+        public TodoItemPage(TodoItem model)
 		{
 			InitializeComponent();
-            BindingContext = new TodoItemViewModel(Navigation);
+			BindingContext = new TodoItemViewModel(Navigation, model);
 		}
 	}
 }
