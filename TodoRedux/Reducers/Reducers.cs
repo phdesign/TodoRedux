@@ -1,5 +1,5 @@
 ﻿using Redux;
-using TodoRedux.States;
+using TodoRedux.State;
 
 namespace TodoRedux.Reducers
 {

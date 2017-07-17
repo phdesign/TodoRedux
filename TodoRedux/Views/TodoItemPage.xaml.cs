@@ -1,5 +1,5 @@
 ﻿using System;
-using TodoRedux.States;
+using TodoRedux.State;
 using TodoRedux.ViewModels;
 using Xamarin.Forms;
 

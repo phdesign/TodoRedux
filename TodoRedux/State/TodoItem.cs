@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TodoRedux.States
+namespace TodoRedux.State
 {
 	public class TodoItem
 	{

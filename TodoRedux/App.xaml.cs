@@ -1,5 +1,6 @@
 ﻿using Redux;
-using TodoRedux.States;
+using TodoRedux.Middleware;
+using TodoRedux.State;
 using TodoRedux.ViewModels;
 using TodoRedux.Views;
 using Xamarin.Forms;
@@ -14,11 +15,10 @@ namespace TodoRedux
         {
             InitializeComponent();
 
-            Store = new Store<ApplicationState>(Reducers.Reducers.ReduceApplication, new ApplicationState());
-
-            Resources = new ResourceDictionary();
-			Resources.Add("primaryGreen", Color.FromHex("91CA47"));
-			Resources.Add("primaryDarkGreen", Color.FromHex("6FA22E"));
+            Store = new Store<ApplicationState>(
+                Reducers.Reducers.ReduceApplication, 
+                new ApplicationState(),
+                new UniqueIdMiddleware().CreateMiddleware<ApplicationState>());
 
             var nav = new NavigationPage(new TodoListPage());
 			nav.BarBackgroundColor = (Color)App.Current.Resources["primaryGreen"];

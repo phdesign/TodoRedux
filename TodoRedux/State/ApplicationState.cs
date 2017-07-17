@@ -1,6 +1,6 @@
 ﻿using System.Collections.Immutable;
 
-namespace TodoRedux.States
+namespace TodoRedux.State
 {
     public class ApplicationState
     {

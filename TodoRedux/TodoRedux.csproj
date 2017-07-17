@@ -34,8 +34,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="States\ApplicationState.cs" />
-    <Compile Include="States\TodoItem.cs" />
+    <Compile Include="State\ApplicationState.cs" />
+    <Compile Include="State\TodoItem.cs" />
     <Compile Include="Reducers\Reducers.cs" />
     <Compile Include="Reducers\TodoReducers.cs" />
     <Compile Include="Actions\AddTodoAction.cs" />
@@ -46,6 +46,8 @@
     <Compile Include="Helpers\StoreExtensions.cs" />
     <Compile Include="Helpers\PropertyChangedExtensions.cs" />
     <Compile Include="Actions\UpdateTodoAction.cs" />
+    <Compile Include="Middleware\UniqueIdMiddleware.cs" />
+    <Compile Include="Actions\IUniqueIdAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />
@@ -66,12 +68,13 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="States\" />
+    <Folder Include="State\" />
     <Folder Include="Actions\" />
     <Folder Include="Reducers\" />
     <Folder Include="ActionCreators\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Middleware\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

@@ -3,7 +3,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Redux;
 using TodoRedux.Actions;
-using TodoRedux.States;
+using TodoRedux.State;
 
 namespace TodoRedux.Reducers
 {

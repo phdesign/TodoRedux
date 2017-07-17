@@ -3,7 +3,7 @@ using System.ComponentModel;
 using PropertyChanged;
 using TodoRedux.ActionCreators;
 using TodoRedux.Actions;
-using TodoRedux.States;
+using TodoRedux.State;
 using Xamarin.Forms;
 
 namespace TodoRedux.ViewModels

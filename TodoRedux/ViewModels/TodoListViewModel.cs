@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using TodoRedux.States;
+using TodoRedux.State;
 using Xamarin.Forms;
 using TodoRedux.Views;
 using PropertyChanged;
