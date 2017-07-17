@@ -10,16 +10,13 @@ namespace TodoRedux.Middleware
 
 		public Middleware<TState> CreateMiddleware<TState>()
 		{
-			return store =>
-			{
-				return next => action =>
-				{
-                    if (action is IUniqueIdAction)
-                    {
-                        ((IUniqueIdAction)action).UniqueId = nextId++;
-                    }
-					return next(action);
-				};
+			return store => next => action =>
+            {
+                if (action is IUniqueIdAction)
+                {
+                    ((IUniqueIdAction)action).UniqueId = nextId++;
+                }
+				return next(action);
 			};
 		}
 	}
