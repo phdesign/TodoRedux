@@ -3,8 +3,8 @@
 	<StackLayout Margin="20" VerticalOptions="StartAndExpand">
 		<Label Text="Text" />
 		<Entry Text="{Binding Text}" />
-		<Button Text="Save" Clicked="OnSaveClicked" />
-		<Button Text="Delete" Clicked="OnDeleteClicked" />
-		<Button Text="Cancel" Clicked="OnCancelClicked" />
+		<Button Text="Save" Command="{Binding Save}" />
+		<!--<Button Text="Delete" Clicked="OnDeleteClicked" />-->
+		<Button Text="Cancel" Command="{Binding Cancel}" />
 	</StackLayout>
 </ContentPage>

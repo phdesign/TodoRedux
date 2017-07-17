@@ -9,7 +9,7 @@ using PropertyChanged;
 namespace TodoRedux.ViewModels
 {
     [AddINotifyPropertyChangedInterface]
-    public class TodoListViewModel
+	public class TodoListViewModel
     {
         private readonly INavigation _navigation;
 
@@ -28,6 +28,7 @@ namespace TodoRedux.ViewModels
         public TodoListViewModel(INavigation navigation)
         {
             this._navigation = navigation;
+            Todos = new List<TodoItem>();
             App.Store.Subscribe(state => {
                 Todos = state.Todos.ToList();
             });

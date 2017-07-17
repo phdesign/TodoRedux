@@ -1096,13 +1096,10 @@
       "projectStyle": "ProjectJson"
     },
     "dependencies": {
+      "PropertyChanged.Fody": "2.1.3",
       "Redux.NET": "2.0.0",
       "System.Collections.Immutable": "1.3.1",
-      "Xamarin.Forms": "2.3.4.231",
-      "PropertyChanged.Fody": {
-        "target": "Package",
-        "version": "[2.1.3, )"
-      }
+      "Xamarin.Forms": "2.3.4.231"
     },
     "frameworks": {
       "portable45-net45+win8+wpa81": {}

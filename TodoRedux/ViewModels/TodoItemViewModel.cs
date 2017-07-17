@@ -24,6 +24,17 @@ namespace TodoRedux.ViewModels
             }
         }
 
+		public Command Cancel
+		{
+			get
+			{
+				return new Command(async () =>
+				{
+					await _navigation.PopAsync();
+				});
+			}
+		}
+
         public TodoItemViewModel(INavigation navigation)
         {
             this._navigation = navigation;
