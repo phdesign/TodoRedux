@@ -8,8 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>TodoRedux</RootNamespace>
     <AssemblyName>TodoRedux</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,8 +45,8 @@
     <Compile Include="Helpers\StoreExtensions.cs" />
     <Compile Include="Helpers\PropertyChangedExtensions.cs" />
     <Compile Include="Actions\UpdateTodoAction.cs" />
-    <Compile Include="Middleware\UniqueIdMiddleware.cs" />
-    <Compile Include="Actions\IUniqueIdAction.cs" />
+    <Compile Include="Middleware\LiteDbMiddleware.cs" />
+    <Compile Include="Helpers\IFileHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />

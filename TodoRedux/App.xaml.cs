@@ -1,4 +1,5 @@
 ﻿using Redux;
+using TodoRedux.Helpers;
 using TodoRedux.Middleware;
 using TodoRedux.State;
 using TodoRedux.ViewModels;
@@ -15,10 +16,11 @@ namespace TodoRedux
         {
             InitializeComponent();
 
+            var dbPath = DependencyService.Get<IFileHelper>().GetLocalFilePath("todo.db");
             Store = new Store<ApplicationState>(
                 Reducers.Reducers.ReduceApplication, 
                 new ApplicationState(),
-                new UniqueIdMiddleware().CreateMiddleware<ApplicationState>());
+                LiteDbMiddleware.CreateMiddleware<ApplicationState>(dbPath));
 
             var nav = new NavigationPage(new TodoListPage());
 			nav.BarBackgroundColor = (Color)App.Current.Resources["primaryGreen"];

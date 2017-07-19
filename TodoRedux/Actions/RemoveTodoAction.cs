@@ -3,9 +3,8 @@ using Redux;
 
 namespace TodoRedux.Actions
 {
-    internal class RemoveTodoAction : IUniqueIdAction
+    internal class RemoveTodoAction : IAction
     {
         public Guid Id { get; internal set; }
-        public int UniqueId { get; set; }
     }
 }
