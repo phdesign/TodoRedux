@@ -1,49 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using LiteDB;
 using Redux;
-using TodoRedux.Actions;
 
 namespace TodoRedux.Middleware
 {
     public class LiteDbMiddleware<TState>
     {
-        private readonly LiteDatabase _db;
         private IStore<TState> _store;
         private bool _isReplaying;
+        private readonly BsonMapper _mapper;
+        private readonly LiteCollection<ActionHistory> _actionCollection;
 
         public LiteDbMiddleware(String databaseName)
         {
-            _db = new LiteDatabase(databaseName);
+            var db = new LiteDatabase(databaseName);
+            _actionCollection = db.GetCollection<ActionHistory>("ActionHistory");
+            _mapper = new BsonMapper();
         }
 
         public Middleware<TState> CreateMiddleware()
         {
-            var actionCollection = _db.GetCollection<ActionHistory>("ActionHistory");
-            var mapper = new BsonMapper();
-
             return store =>
             {
                 _store = store;
                 return next => action =>
                 {
-                    if (action is ReplayHistoryAction)
-                    {
-                        foreach (var actionHistory in actionCollection.FindAll())
-                        {
-                            var typeOfAction = Type.GetType(actionHistory.Type);
-                            var historicalAction = (IAction)mapper.ToObject(typeOfAction, actionHistory.Action);
-                            store.Dispatch(historicalAction);
-                        }
-                        return next(action);
-                    }
                     var result = next(action);
-                    if (!_isReplaying)
-                    {
-                        var bsonAction = mapper.ToDocument(action);
-                        actionCollection.Insert(new ActionHistory { Type = action.GetType().AssemblyQualifiedName, Action = bsonAction });
-                    }
+                    if (_isReplaying) return result;
+
+                    var bsonAction = _mapper.ToDocument(action);
+                    _actionCollection.Insert(new ActionHistory { Type = action.GetType().AssemblyQualifiedName, Action = bsonAction });
                     return result;
                 };
             };
@@ -52,7 +38,12 @@ namespace TodoRedux.Middleware
         public void ReplayHistory()
         {
             _isReplaying = true;
-            _store.Dispatch(new ReplayHistoryAction());
+            foreach (var actionHistory in _actionCollection.FindAll())
+            {
+                var typeOfAction = Type.GetType(actionHistory.Type);
+                var historicalAction = (IAction)_mapper.ToObject(typeOfAction, actionHistory.Action);
+                _store.Dispatch(historicalAction);
+            }
             _isReplaying = false;
         }   
     }

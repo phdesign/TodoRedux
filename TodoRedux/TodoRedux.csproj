@@ -47,7 +47,6 @@
     <Compile Include="Actions\UpdateTodoAction.cs" />
     <Compile Include="Middleware\LiteDbMiddleware.cs" />
     <Compile Include="Helpers\IFileHelper.cs" />
-    <Compile Include="Actions\ReplayHistoryAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />
