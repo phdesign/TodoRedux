@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Redux;
+using TodoRedux.Actions;
 using TodoRedux.Helpers;
 using TodoRedux.Middleware;
 using TodoRedux.State;
@@ -18,12 +19,10 @@ namespace TodoRedux
             InitializeComponent();
 
             var dbPath = DependencyService.Get<IFileHelper>().GetLocalFilePath("todo.db");
-            var liteDbMiddleware = new LiteDbMiddleware<ApplicationState>(dbPath);
             Store = new Store<ApplicationState>(
                 Reducers.Reducers.ReduceApplication, 
                 new ApplicationState(),
-                liteDbMiddleware.CreateMiddleware());
-            liteDbMiddleware.ReplayHistory();
+                new DatabaseMiddleware<ApplicationState>(dbPath).CreateMiddleware());
 
             var nav = new NavigationPage(new TodoListPage());
 			nav.BarBackgroundColor = (Color)App.Current.Resources["primaryGreen"];
@@ -34,7 +33,7 @@ namespace TodoRedux
 
         protected override void OnStart()
         {
-            // Handle when your app starts
+            Store.Dispatch(new FetchTodosAction());
         }
 
         protected override void OnSleep()

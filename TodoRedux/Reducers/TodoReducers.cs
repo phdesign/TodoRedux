@@ -23,11 +23,20 @@ namespace TodoRedux.Reducers
             {
                 return RemoveTodoReducer(previousState, (RemoveTodoAction)action);
             }
+            if (action is FetchTodosAction)
+            {
+                return FetchTodosReducer(previousState, (FetchTodosAction)action);
+            }
 
 			return previousState;
 		}
 
-		private static ImmutableArray<TodoItem> UpdateTodoReducer(ImmutableArray<TodoItem> previousState, UpdateTodoAction action)
+        private static ImmutableArray<TodoItem> FetchTodosReducer(ImmutableArray<TodoItem> previousState, FetchTodosAction action)
+        {
+            return ImmutableArray.CreateRange(action.Todos);
+        }
+
+        private static ImmutableArray<TodoItem> UpdateTodoReducer(ImmutableArray<TodoItem> previousState, UpdateTodoAction action)
 		{
 			return previousState
 				.Select(x =>

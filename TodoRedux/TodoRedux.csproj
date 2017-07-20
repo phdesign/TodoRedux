@@ -45,8 +45,9 @@
     <Compile Include="Helpers\StoreExtensions.cs" />
     <Compile Include="Helpers\PropertyChangedExtensions.cs" />
     <Compile Include="Actions\UpdateTodoAction.cs" />
-    <Compile Include="Middleware\LiteDbMiddleware.cs" />
     <Compile Include="Helpers\IFileHelper.cs" />
+    <Compile Include="Middleware\DatabaseMiddleware.cs" />
+    <Compile Include="Actions\FetchTodosAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />
