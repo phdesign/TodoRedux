@@ -31,5 +31,10 @@ namespace TodoRedux.ActionCreators
 				Id = id
 			};
 		}
+
+        public static IAction FetchAll()
+        {
+            return new FetchTodosAction();
+        }
     }
 }

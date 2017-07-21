@@ -1,10 +1,8 @@
-﻿using System.Linq;
-using Redux;
-using TodoRedux.Actions;
+﻿using Redux;
+using TodoRedux.ActionCreators;
 using TodoRedux.Helpers;
 using TodoRedux.Middleware;
 using TodoRedux.State;
-using TodoRedux.ViewModels;
 using TodoRedux.Views;
 using Xamarin.Forms;
 
@@ -33,7 +31,7 @@ namespace TodoRedux
 
         protected override void OnStart()
         {
-            Store.Dispatch(new FetchTodosAction());
+            Store.Dispatch(TodoActionCreators.FetchAll());
         }
 
         protected override void OnSleep()
