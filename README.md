@@ -2,7 +2,7 @@
 
 This is a sample Xamarin app demonstrating how to use Redux.NET Middleware with a LiteDb database to store and restore state.
 
-This is the supporting for the blog series on Advanced Xamarin in Redux, available here:
+This is the supporting code for the blog series on Advanced Xamarin in Redux, available here:
 
 * [Advanced Redux in Xamarin Part 1: Action Creators](http://phdesign.com.au/programming/advanced-redux-in-xamarin-part1-action-creators/)
 * [Advanced Redux in Xamarin Part 2: Persistent Actions Middleware](http://phdesign.com.au/programming/advanced-redux-in-xamarin-part2-persistent-actions-middleware/)
