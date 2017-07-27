@@ -23,7 +23,7 @@ namespace TodoRedux
                 new DatabaseMiddleware<ApplicationState>(dbPath).CreateMiddleware());
 
             var nav = new NavigationPage(new TodoListPage());
-			nav.BarBackgroundColor = (Color)App.Current.Resources["primaryGreen"];
+			nav.BarBackgroundColor = (Color)App.Current.Resources["titleBarBackground"];
 			nav.BarTextColor = Color.White;
 
 			MainPage = nav;
